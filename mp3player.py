@@ -9,15 +9,17 @@ import pygame
 root = Tk()
 root.title('Mp3 Play - Wisp')
 root.iconbitmap('music.ico')
-root.geometry("355x275")
+root.geometry("355x350")
 # initialze pygame mixer
 pygame.mixer.init()
 
 #get music time info 
-def time():
-    current_time = pygame.mixer.music.get_pos()
+def time_music():
+    current_time = pygame.mixer.music.get_pos()/ 1000
     # Adiciona texto no status bar 
-    status_bar.config(text=current_time)
+    status_bar.config(text=int(current_time))
+    # up time
+    status_bar.after(1000, time_music)
 
 
 # Add songs function
@@ -50,6 +52,8 @@ def play():
     song = f'music/{song}.mp3'
     pygame.mixer.music.load(song)
     pygame.mixer.music.play(loops=0)
+    # Call the play time function
+    time_music()
 #var global 
 global paused
 paused = False
@@ -156,6 +160,6 @@ menu_del_song.add_command(label="Delete ALL Song from Playlist", command=delete_
 
 
 # status bar
-status_bar = Label(root, text = '', bd=1, relief=GROOVE, anchor=END)
+status_bar = Label(root, text = '', bd=1, relief=GROOVE, anchor=E)
 status_bar.pack(fill=X, side=BOTTOM, ipadx=2)
 root.mainloop() 
