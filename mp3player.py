@@ -3,6 +3,7 @@ from cProfile import label
 from platform import libc_ver
 from tkinter import *
 from tkinter import filedialog
+import time
 
 import pygame 
 
@@ -16,8 +17,11 @@ pygame.mixer.init()
 #get music time info 
 def time_music():
     current_time = pygame.mixer.music.get_pos()/ 1000
+
+    # time status convert
+    convert_time_info_music = time.strftime('%H:%M:%S', time.gmtime(current_time))
     # Adiciona texto no status bar 
-    status_bar.config(text=int(current_time))
+    status_bar.config(text=convert_time_info_music)
     # up time
     status_bar.after(1000, time_music)
 
@@ -34,7 +38,7 @@ def delete_all_songs():
 def add_song():
     song = filedialog.askopenfilename(initialdir = "music", title="Choose A Song", filetypes=(("mp3 Files", "*.mp3"),))
     # Strip out the directory info and .mp3 
-    song = song.replace("smusic/", "")
+    song = song.replace("C:/Users/Code/Documents/GitHub/mp3Player/music", "")
     song = song.replace(".mp3", "")
     # Add Songs in list
     box_player.insert(END, song)
