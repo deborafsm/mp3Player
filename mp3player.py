@@ -25,7 +25,7 @@ def delete_all_songs():
 def add_song():
     song = filedialog.askopenfilename(initialdir = "music", title="Choose A Song", filetypes=(("mp3 Files", "*.mp3"),))
     # Strip out the directory info and .mp3 
-    song = song.replace("C:/Users/Code/Documents/GitHub/mp3Player/music/", "")
+    song = song.replace("smusic/", "")
     song = song.replace(".mp3", "")
     # Add Songs in list
     box_player.insert(END, song)
@@ -147,4 +147,8 @@ my_menu.add_cascade(label="Remove Songs", menu=menu_del_song)
 menu_del_song.add_command(label="Delete a Song from Playlist", command=delete_song)
 menu_del_song.add_command(label="Delete ALL Song from Playlist", command=delete_all_songs)
 
+
+# status bar
+status_bar = Label(root, text = '', bd=1, relief=GROOVE, anchor=END)
+status_bar.pack(fill=X, side=BOTTOM, ipadx=2)
 root.mainloop() 
