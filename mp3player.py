@@ -13,6 +13,13 @@ root.geometry("355x275")
 # initialze pygame mixer
 pygame.mixer.init()
 
+#get music time info 
+def time():
+    current_time = pygame.mixer.music.get_pos()
+    # Adiciona texto no status bar 
+    status_bar.config(text=current_time)
+
+
 # Add songs function
 def delete_song():
     # Delete a song song
